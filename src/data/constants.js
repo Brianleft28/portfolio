@@ -9,7 +9,7 @@ export const Bio = {
     "I am web developer with experience in various modern technologies. My primary focus is on both frontend and backend development, using a robust set of tools and frameworks to create efficient and scalable web applications..",
   github: "https://github.com/Brianleft28",
   resume:
-    "https://drive.google.com/file/d/1WuIuUAVRnETJPykDJ58SYhoqZgdmj1Xg/view?usp=sharing",
+    "https://drive.google.com/file/d/1Pble2Hzfu1PKX0iBIxf69O4rpYy6IY2n/view",
   linkedin: "https://www.linkedin.com/in/brian-benegas-44770729b/",
   twitter: "https://twitter.com/Brianleft28",
 };
