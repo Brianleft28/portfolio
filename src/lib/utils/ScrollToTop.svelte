@@ -22,7 +22,7 @@
 
 {#if !showNavbar}
 	<button
-		class="fixed bottom-4 right-4 bg-secondary/80 text-white p-8 rounded-md rounded shadow-lg hover:bg-secondary transition-colors duration-300 cursor-pointer
+		class="fixed bottom-4 right-4 bg-secondary/80 text-white p-8 rounded-mdw shadow-lg hover:bg-secondary transition-colors duration-300 cursor-pointer
     
         "
 		onclick={scrollToTop}
