@@ -19,7 +19,6 @@ export const lightThemes: Writable<string[]> = writable([
 export const darkThemes: Writable<string[]> = writable([
 	'dark',
 	'synthwave',
-
 	'halloween',
 	'forest',
 	'black',

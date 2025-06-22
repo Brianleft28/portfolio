@@ -2,6 +2,9 @@
 	import { lang, type Lang } from '$lib/stores/index';
 	import { browser } from '$app/environment';
 	import { onMount } from 'svelte';
+	import controllerLabels from './controllerLabels.json';
+
+	const labels = controllerLabels.controllerLabels;
 
 	let currentLang: Lang = 'ES'; // Idioma predeterminado
 
@@ -13,8 +16,6 @@
 			localStorage.setItem('lang', newLang);
 		}
 		lang.set(newLang);
-		// Opcional: Cierra el modal después de seleccionar un idioma.
-		// La forma más sencilla es que el usuario lo cierre con el botón "Cerrar".
 	}
 
 	onMount(() => {
@@ -32,8 +33,12 @@
 <button
 	type="button"
 	class="btn btn-lg btn-ghost gap-2 px-3 text-base w-full justify-start"
-	aria-label="Change Language"
-	title="Change Language"
+	aria-label={labels.langController[$lang]
+		? labels.langController[$lang].ariaLabel
+		: labels.langController['ES'].ariaLabel}
+	title={labels.langController[$lang]
+		? labels.langController[$lang].title
+		: labels.langController['ES'].title}
 	on:click={() => {
 		const modalCheckbox = document.getElementById('lang_mobile_modal') as HTMLInputElement;
 		if (modalCheckbox) modalCheckbox.checked = true;
@@ -49,14 +54,22 @@
 			d="M12 21a9 9 0 1 0 0-18m0 18a9 9 0 1 1 0-18m0 18c2.761 0 3.941-5.163 3.941-9S14.761 3 12 3m0 18c-2.761 0-3.941-5.163-3.941-9S9.239 3 12 3M3.5 9h17m-17 6h17"
 		/>
 	</svg>
-	<span>Cambiar Idioma</span>
+	<span
+		>{labels.langController[$lang]
+			? labels.langController[$lang].title
+			: labels.langController['ES'].title}</span
+	>
 </button>
 
 <!-- Estructura del Modal -->
 <input type="checkbox" id="lang_mobile_modal" class="modal-toggle" />
 <div class="modal" role="dialog">
 	<div class="modal-box">
-		<h3 class="font-bold text-lg mb-4 text-center">Seleccionar Idioma</h3>
+		<h3 class="font-bold text-lg mb-4 text-center">
+			{labels.langController[$lang]
+				? labels.langController[$lang].modalTitle
+				: labels.langController['ES'].modalTitle}
+		</h3>
 
 		<ul class="menu flex flex-col w-full justify-evenly items-start gap-1">
 			{#each ['ES', 'EN', 'FR', 'DE', 'JP'] as langOption}
@@ -88,9 +101,17 @@
 
 		<!-- Botón para cerrar el modal -->
 		<div class="modal-action mt-6">
-			<label for="lang_mobile_modal" class="btn btn-error">Cerrar</label>
+			<label for="lang_mobile_modal" class="btn btn-error"
+				>{labels.langController[$lang]
+					? labels.langController[$lang].modalClose
+					: labels.langController['ES'].modalClose}</label
+			>
 		</div>
 	</div>
 	<!-- Permite cerrar el modal al hacer clic fuera -->
-	<label class="modal-backdrop" for="lang_mobile_modal">Cerrar</label>
+	<label class="modal-backdrop" for="lang_mobile_modal"
+		>{labels.langController[$lang]
+			? labels.langController[$lang].modalClose
+			: labels.langController['ES'].modalClose}</label
+	>
 </div>

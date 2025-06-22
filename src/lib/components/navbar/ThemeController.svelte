@@ -1,6 +1,10 @@
 <script lang="ts">
 	import { theme, lightThemes, darkThemes } from '$lib/stores/themeStore';
 	import { browser } from '$app/environment';
+	import { lang } from '$lib/stores';
+	import controllerLabels from './controllerLabels.json';
+
+	const labels = controllerLabels.controllerLabels;
 
 	let currentTheme = 'abyss';
 	let lightThemesList: string[] = [];
@@ -28,8 +32,12 @@
 		tabindex="0"
 		role="button"
 		class="btn btn-lg btn-ghost gap-2 px-3 text-base"
-		aria-label="Change Theme"
-		title="Change Theme"
+		aria-label={labels.themeController[$lang]
+			? labels.themeController[$lang].ariaLabel
+			: labels.themeController['ES'].ariaLabel}
+		title={labels.themeController[$lang]
+			? labels.themeController[$lang].title
+			: labels.themeController['ES'].title}
 	>
 		<div class="bg-base-100 grid shrink-0 grid-cols-2 gap-1 rounded-md p-2 transition-colors">
 			<div class="bg-base-content size-2 rounded-full"></div>
@@ -53,7 +61,11 @@
 	>
 		<!-- Temas claros -->
 		<div class="flex-1 flex flex-col items-center">
-			<h3 class="text-lg font-bold mx-auto mb-2 text-center">Temas claros</h3>
+			<h3 class="text-lg font-bold mx-auto mb-2 text-center">
+				{labels.themeController[$lang]
+					? labels.themeController[$lang].lightThemesTitle
+					: labels.themeController['ES'].lightThemesTitle}
+			</h3>
 			<ul class="grid grid-cols-3 gap-3">
 				{#each lightThemesList as theme}
 					<li>
@@ -70,7 +82,11 @@
 		<div class="divider divider-horizontal"></div>
 		<!-- Temas oscuros -->
 		<div class="flex-1 flex flex-col items-center">
-			<h3 class="text-lg font-bold mx-auto mb-2 text-center">Temas oscuros</h3>
+			<h3 class="text-lg font-bold mx-auto mb-2 text-center">
+				{labels.themeController[$lang]
+					? labels.themeController[$lang].darkThemesTitle
+					: labels.themeController['ES'].darkThemesTitle}
+			</h3>
 			<ul class="grid grid-cols-3 gap-3">
 				{#each darkThemesList as theme}
 					<li>

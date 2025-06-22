@@ -2,7 +2,9 @@
 	import { lang, type Lang } from '$lib/stores/index';
 	import { browser } from '$app/environment';
 	import { onMount } from 'svelte';
+	import { controllerLabels } from '$lib/components/navbar/controllerLabels.json';
 
+	const labels = controllerLabels;
 	let currentLang: Lang = 'ES'; // Idioma predeterminado
 
 	$: currentLang = $lang;
@@ -31,8 +33,12 @@
 		tabindex="0"
 		role="button"
 		class="btn btn-lg btn-ghost gap-2 px-3 text-base font-bold"
-		aria-label="Change Language"
-		title="Change Language"
+		aria-label={labels.langController[$lang]
+			? labels.langController[$lang].ariaLabel
+			: labels.langController['ES'].ariaLabel}
+		title={labels.langController[$lang]
+			? labels.langController[$lang].title
+			: labels.langController['ES'].title}
 	>
 		<svg
 			class="text-base-content size-8"

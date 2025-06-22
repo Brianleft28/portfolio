@@ -1,6 +1,10 @@
 <script lang="ts">
 	import { theme, lightThemes, darkThemes } from '$lib/stores/themeStore';
 	import { browser } from '$app/environment';
+	import { lang } from '$lib/stores';
+	import controllerLabels from './controllerLabels.json';
+
+	const labels = controllerLabels.controllerLabels;
 
 	let currentTheme = 'abyss';
 	let lightThemesList: string[] = [];
@@ -20,18 +24,19 @@
 			localStorage.setItem('theme', newTheme);
 		}
 		theme.set(newTheme);
-		// Opcional: Cierra el modal programáticamente si es necesario, aunque el label lo hará.
-		// const modalCheckbox = document.getElementById('theme_mobile_modal') as HTMLInputElement;
-		// if (modalCheckbox) modalCheckbox.checked = false;
 	}
 </script>
 
-<!-- El botón ahora es un <label> que activa el modal -->
+<!-- El botón ahora es un <button> que activa el modal -->
 <button
 	type="button"
 	class="btn btn-lg btn-ghost gap-2 px-3 text-base w-full justify-start"
-	aria-label="Change Theme"
-	title="Change Theme"
+	aria-label={labels.themeController[$lang]
+		? labels.themeController[$lang].ariaLabel
+		: labels.themeController['ES'].ariaLabel}
+	title={labels.themeController[$lang]
+		? labels.themeController[$lang].title
+		: labels.themeController['ES'].title}
 	on:click={() => {
 		const modalCheckbox = document.getElementById('theme_mobile_modal') as HTMLInputElement;
 		if (modalCheckbox) modalCheckbox.checked = true;
@@ -43,7 +48,11 @@
 		<div class="bg-secondary size-2 rounded-full"></div>
 		<div class="bg-accent size-2 rounded-full"></div>
 	</div>
-	<span>Cambiar Tema</span>
+	<span
+		>{labels.themeController[$lang]
+			? labels.themeController[$lang].title
+			: labels.themeController['ES'].title}</span
+	>
 </button>
 
 <!-- Estructura del Modal -->
@@ -56,8 +65,11 @@
 		<div class="flex flex-col gap-4">
 			<!-- Temas claros -->
 			<div class="flex flex-col items-center">
-				<h3 class="text-lg font-bold mx-auto mb-2 text-center">Temas claros</h3>
-				<!-- Usamos grid-cols-2 para mejor visualización en móviles -->
+				<h3 class="text-lg font-bold mx-auto mb-2 text-center">
+					{labels.themeController[$lang]
+						? labels.themeController[$lang].lightThemesTitle
+						: labels.themeController['ES'].lightThemesTitle}
+				</h3>
 				<ul class="grid grid-cols-2 gap-3 w-full">
 					{#each lightThemesList as theme}
 						<li>
@@ -76,7 +88,11 @@
 
 			<!-- Temas oscuros -->
 			<div class="flex flex-col items-center">
-				<h3 class="text-lg font-bold mx-auto mb-2 text-center">Temas oscuros</h3>
+				<h3 class="text-lg font-bold mx-auto mb-2 text-center">
+					{labels.themeController[$lang]
+						? labels.themeController[$lang].darkThemesTitle
+						: labels.themeController['ES'].darkThemesTitle}
+				</h3>
 				<ul class="grid grid-cols-2 gap-3 w-full">
 					{#each darkThemesList as theme}
 						<li>
@@ -94,9 +110,17 @@
 
 		<!-- Botón para cerrar el modal -->
 		<div class="modal-action mt-6">
-			<label for="theme_mobile_modal" class="btn btn-error">Cerrar</label>
+			<label for="theme_mobile_modal" class="btn btn-error"
+				>{labels.themeController[$lang]
+					? labels.themeController[$lang].modalClose
+					: labels.themeController['ES'].modalClose}</label
+			>
 		</div>
 	</div>
 	<!-- Permite cerrar el modal al hacer clic fuera -->
-	<label class="modal-backdrop" for="theme_mobile_modal">Cerrar</label>
+	<label class="modal-backdrop" for="theme_mobile_modal"
+		>{labels.themeController[$lang]
+			? labels.themeController[$lang].modalClose
+			: labels.themeController['ES'].modalClose}</label
+	>
 </div>

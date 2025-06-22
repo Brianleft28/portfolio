@@ -14,6 +14,7 @@
 	import { onMount } from 'svelte';
 	import { browser } from '$app/environment';
 	import { fly } from 'svelte/transition'; // Importamos la transición de Svelte
+	import RedesSocialesMobile from './RedesSocialesMobile.svelte';
 
 	const items = menuItemsData.menuItems;
 
@@ -30,7 +31,7 @@
 	});
 </script>
 
-<!-- La Navbar se queda igual -->
+<!-- Navbar  -->
 <navbar
 	class="navbar font-[sans-serif] px-4 md:px-10 py-4 fixed top-0 bg-base-100/80 backdrop-blur-xs shadow-sm transition-transform duration-300 ease-in-out z-40"
 	class:translate-y-0={$showNavbar}
@@ -60,9 +61,10 @@
 	</div>
 	<div class="navbar-center lg:flex hidden"><Logo /></div>
 	<div class="navbar-end lg:flex hidden items-center gap-4">
+		<RedesSociales />
+		<div class="divider divider-horizontal"></div>
 		<div class="dropdown dropdown-end"><ThemeController /></div>
 		<div class="dropdown dropdown-end"><LangController /></div>
-		<RedesSociales />
 	</div>
 
 	<!-- Logo Móvil -->
@@ -130,9 +132,9 @@
 
 			<!-- Controles -->
 			<div class="mt-auto pt-4 flex flex-col justify-around items-center gap-2">
+				<RedesSocialesMobile />
 				<ThemeControllerMobile />
 				<LangControllerMobile />
-				<RedesSociales />
 			</div>
 		</ul>
 	</aside>
