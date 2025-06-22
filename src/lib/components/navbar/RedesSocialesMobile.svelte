@@ -1,7 +1,7 @@
 <script lang="ts">
 	// Importamos el store de idioma para que el componente sea reactivo
 	import { lang } from '$lib/stores';
-	import socialLInk from '$lib/components/navbar/socialLinks.json';
+	import socialLInk from './data/socialLinks.json';
 
 	const socialLinks = socialLInk.socialLinks;
 </script>

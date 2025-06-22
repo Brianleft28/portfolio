@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { lang } from '$lib/stores';
-	import socialLinksData from './socialLinks.json';
+	import socialLinksData from './data/socialLinks.json';
 	const socialLinks = socialLinksData.socialLinks;
 </script>
 
