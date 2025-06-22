@@ -57,7 +57,7 @@ jobs:
                       # Usamos docker-compose para reiniciar el servicio
                       #'up -d' de docker-compose reinicia el contenedor con la nueva imagen
                       echo "====> Reiniciando el contenedor con la nueva imagen"
-                      docker-compose up -d
+                      docker compose up -d
 
                       # Limpiamos imágenes antiguas que ya no se usan
                       echo "====> Limpiando imágenes antiguas"
