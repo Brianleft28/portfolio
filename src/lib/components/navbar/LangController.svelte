@@ -30,7 +30,7 @@
 	<div
 		tabindex="0"
 		role="button"
-		class="btn btn-lg btn-ghost gap-2 px-3 text-base font-bold hover:bg-base-100/20"
+		class="btn btn-lg btn-ghost gap-2 px-3 text-base font-bold"
 		aria-label="Change Language"
 		title="Change Language"
 	>

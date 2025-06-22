@@ -1,16 +1,15 @@
 <script lang="ts">
 	import Navbar from '$lib/components/navbar/Navbar.svelte';
-	import ScrollToTop from '$lib/utils/ScrollToTop.svelte';
 	import '../app.css';
-
-	let { children } = $props();
+	import ScrollToTop from '$lib/utils/ScrollToTop.svelte';
 </script>
 
-<div class="mb-[81px] md:mb-[100px]">
+<div class="flex flex-col">
 	<Navbar />
+	<!-- El padding superior es necesario porque la Navbar es fija -->
+	<main class="flex-grow pt-24 px-4 md:px-8">
+		<slot />
+	</main>
 </div>
-<main class=" flex px-4 md:px-16 flex-col text-base-content">
-	{@render children()}
-</main>
 
 <ScrollToTop />
