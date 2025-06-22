@@ -43,17 +43,21 @@
 				<!-- Menú para pantallas grandes -->
 				<ul class="menu menu-horizontal font-[sans-serif] px-1 text-md">
 					{#each items as item}
-						<li>
-							<a
-								href={item[$lang].url}
-								class="text-base-content hover:text-primary transition-colors duration-200 hover:bg-transparent"
-								aria-label={item[$lang].title}
-								class:text-primary={$page.url.pathname === item[$lang].url}
-								class:font-bold={$page.url.pathname === item[$lang].url}
-							>
-								{item[$lang].title}
-							</a>
-						</li>
+						{#if item[$lang] || item['ES']}
+							<li>
+								<a
+									href={item[$lang] ? item[$lang].url : item['ES'].url}
+									class="text-base-content hover:text-primary transition-colors duration-200 hover:bg-transparent"
+									aria-label={item[$lang] ? item[$lang].title : item['ES'].title}
+									class:text-primary={$page?.url.pathname ===
+										(item[$lang] ? item[$lang].url : item['ES'].url)}
+									class:font-bold={$page?.url.pathname ===
+										(item[$lang] ? item[$lang].url : item['ES'].url)}
+								>
+									{item[$lang] ? item[$lang].title : item['ES'].title}
+								</a>
+							</li>
+						{/if}
 					{/each}
 				</ul>
 			</div>
@@ -124,21 +128,25 @@
 				</div>
 			</li>
 			{#each items as item}
-				<li>
-					<!-- Label para cerrar el drawer al hacer clic en un ítem del menú -->
-					<label for="mobile-drawer" class="block">
-						<!-- Ajuste de padding para mejor click target -->
-						<a
-							href={item[$lang].url}
-							class="text-base-content hover:text-primary transition-colors duration-200 block w-full py-2 px-3"
-							aria-label={item[$lang].title}
-							class:text-primary={$page.url.pathname === item[$lang].url}
-							class:font-bold={$page.url.pathname === item[$lang].url}
-						>
-							{item[$lang].title}
-						</a>
-					</label>
-				</li>
+				{#if item[$lang] || item['ES']}
+					<li>
+						<!-- Label para cerrar el drawer al hacer clic en un ítem del menú -->
+						<label for="mobile-drawer" class="block">
+							<!-- Ajuste de padding para mejor click target -->
+							<a
+								href={item[$lang] ? item[$lang].url : item['ES'].url}
+								class="text-base-content hover:text-primary transition-colors duration-200 block w-full py-2 px-3"
+								aria-label={item[$lang] ? item[$lang].title : item['ES'].title}
+								class:text-primary={$page.url.pathname ===
+									(item[$lang] ? item[$lang].url : item['ES'].url)}
+								class:font-bold={$page.url.pathname ===
+									(item[$lang] ? item[$lang].url : item['ES'].url)}
+							>
+								{item[$lang] ? item[$lang].title : item['ES'].title}
+							</a>
+						</label>
+					</li>
+				{/if}
 			{/each}
 			<!-- Controles de Tema e Idioma en el drawer -->
 			<li class="mt-auto pt-4">
