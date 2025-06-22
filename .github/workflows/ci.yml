@@ -1,11 +1,15 @@
-name: CI - Build and Push Image Docker
+name: CI/CD - Build, Push and Deploy Docker Image Application
 
+# Disparadores del workflow
 on:
     push:
-        branches: ['main']
-    workflow_dispatch:
+        branches: ['main'] # Se ejecuta en cada push a la rama main
+    workflow_dispatch: # Permite ejecutar el workflow manualmente desde la interfaz de GitHub
 
+# Definición de los trabajos del workflow
+# Este workflow construye y despliega una imagen Docker de la aplicación SvelteKit a Docker
 jobs:
+    # -- JOB 1: CONSTRUCCIÓN Y PUBLICACIÓN DE LA IMAGEN DOCKER (CI) --
     build-and-push:
         runs-on: ubuntu-latest
         steps:
@@ -24,3 +28,39 @@ jobs:
                   context: .
                   push: true
                   tags: ${{ secrets.DOCKERHUB_USERNAME }}/portfolio-sveltekit:latest
+
+    # -- JOB 2: DESPLIEGUE CONTINUO EN SERVIDOR REMOTO (CD) --
+    deploy:
+        # 'needs' indica que este job depende de la finalización exitosa del job anterior
+        needs: build-and-push
+        # Definición del entorno donde se ejecutará el job
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Deploy to VPS via SSH
+              # Usamos una acción popular y confiable para ejecutar comandos vía SSH
+              uses: appleboy/ssh-action@v0.1.10
+              with:
+                  host: ${{ secrets.VPS_HOST }}
+                  username: ${{ secrets.VPS_USER }}
+                  key: ${{ secrets.VPS_SSH_PRIVATE_KEY }}
+                  port: 22 # El puerto estándar de SSH
+                  script: |
+                      # Nos movemos al directorio correcto de la aplicación en el VPS
+                      cd /var/www/brianleft.com/app
+
+                      # Descargamos la última versión de la imagen desde Docker Hub 
+                      # Docker solo bajará las capas que hayan cambiado, optimizando el proceso
+                      echo "====> Descargando la nueva imagen desde Docker Hub"
+                      docker pull ${{ secrets.DOCKERHUB_USERNAME }}/portfolio-sveltekit:latest
+
+                      # Usamos docker-compose para reiniciar el servicio
+                      #'up -d' de docker-compose reinicia el contenedor con la nueva imagen
+                      echo "====> Reiniciando el contenedor con la nueva imagen"
+                      docker-compose up -d
+
+                      # Limpiamos imágenes antiguas que ya no se usan
+                      echo "====> Limpiando imágenes antiguas"
+                      docker image prune -af
+
+                      echo "====> Despliegue completado exitosamente"
