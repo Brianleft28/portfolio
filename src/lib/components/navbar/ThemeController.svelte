@@ -2,7 +2,7 @@
 	import { theme, lightThemes, darkThemes } from '$lib/stores/themeStore';
 	import { browser } from '$app/environment';
 	import { lang } from '$lib/stores';
-	import controllerLabels from '../data/controllerLabels.json';
+	import controllerLabels from './data/controllerLabels.json';
 
 	const labels = controllerLabels.controllerLabels;
 

@@ -10,7 +10,7 @@
 	// Stores y datos (sin cambios)
 	import { lang, showNavbar } from '$lib/stores/index';
 	import { page } from '$app/stores';
-	import menuItemsData from '$lib/components/navbar/menuItems.json';
+	import menuItemsData from '$lib/components/navbar/data/menuItems.json';
 	import { onMount } from 'svelte';
 	import { browser } from '$app/environment';
 	import { fly } from 'svelte/transition'; // Importamos la transición de Svelte

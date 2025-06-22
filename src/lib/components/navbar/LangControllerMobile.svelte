@@ -2,7 +2,7 @@
 	import { lang, type Lang } from '$lib/stores/index';
 	import { browser } from '$app/environment';
 	import { onMount } from 'svelte';
-	import controllerLabels from '../data/controllerLabels.json';
+	import controllerLabels from './data/controllerLabels.json';
 
 	const labels = controllerLabels.controllerLabels;
 
