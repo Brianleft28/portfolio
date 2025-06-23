@@ -11,7 +11,7 @@
 	import { lang, showNavbar } from '$lib/stores/index';
 	import { page } from '$app/stores';
 	import menuItemsData from '$lib/components/navbar/data/menuItems.json';
-	import { onMount } from 'svelte';
+	import { onDestroy, onMount } from 'svelte';
 	import { browser } from '$app/environment';
 	import { fly } from 'svelte/transition'; // Importamos la transición de Svelte
 	import RedesSocialesMobile from './RedesSocialesMobile.svelte';
@@ -20,13 +20,41 @@
 
 	// La única lógica que necesitamos: una variable para saber si el drawer está abierto.
 	let isDrawerOpen = false;
+	// --- OPTIMIZACIÓN DE SCROLL CON DEBOUNCE ---
+
+	/**
+	 * Función Debounce: Retrasa la ejecución de una función hasta que haya pasado
+	 * un tiempo (delay) sin que se la llame. Esto evita ejecuciones excesivas.
+	 */
+	function debounce<T extends (...args: any[]) => any>(func: T, delay: number) {
+		let timeout: ReturnType<typeof setTimeout>;
+		return function (this: ThisParameterType<T>, ...args: Parameters<T>) {
+			clearTimeout(timeout);
+			timeout = setTimeout(() => func.apply(this, args), delay);
+		};
+	}
+
+	// La lógica del scroll, ahora en su propia función.
+	const handleScroll = () => {
+		const threshold = document.body.scrollHeight * 0.08;
+		showNavbar.set(window.scrollY < threshold);
+	};
+
+	// Creamos una versión "debounced" de nuestra función.
+	// Solo se ejecutará 100ms después de que el usuario deje de hacer scroll.
+	const debouncedScrollHandler = debounce(handleScroll, 100);
 
 	onMount(() => {
 		if (browser) {
-			window.addEventListener('scroll', () => {
-				const threshold = document.body.scrollHeight * 0.08;
-				showNavbar.set(window.scrollY < threshold);
-			});
+			// Usamos el listener optimizado.
+			window.addEventListener('scroll', debouncedScrollHandler);
+		}
+	});
+
+	// Es CRUCIAL eliminar el listener cuando el componente se destruye para evitar fugas de memoria.
+	onDestroy(() => {
+		if (browser) {
+			window.removeEventListener('scroll', debouncedScrollHandler);
 		}
 	});
 </script>

@@ -12,14 +12,22 @@
 	function setLang(newLang: Lang) {
 		currentLang = newLang;
 		if (browser) {
-			localStorage.setItem('lang', newLang);
+			// 1. Guardamos la cookie
+			document.cookie = `lang=${newLang.toLocaleLowerCase()}; path=/; max-age=31536000; SameSite=Lax`;
+
+			// 2 Actualizamos el tag <html> en tiempo real.
+			document.documentElement.setAttribute('lang', newLang.toLowerCase());
 		}
+		// 3. Actualizamos el store de Svelte (esto ya estaba)
 		lang.set(newLang);
 	}
-
 	onMount(() => {
 		if (browser) {
-			const savedLang = localStorage.getItem('lang');
+			// Leemos la cookie 'lang' para restaurar el idioma.
+			const savedLang = document.cookie
+				.split('; ')
+				.find((row) => row.startsWith('lang='))
+				?.split('=')[1];
 			if (savedLang) {
 				currentLang = savedLang as Lang;
 				lang.set(currentLang);
