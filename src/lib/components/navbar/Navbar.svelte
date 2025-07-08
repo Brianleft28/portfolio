@@ -88,6 +88,7 @@
 		</ul>
 	</div>
 	<div class="navbar-center lg:flex hidden"><Logo /></div>
+	<!--  Controles y redes sociales Desktop -->
 	<div class="navbar-end lg:flex hidden items-center gap-4">
 		<RedesSociales />
 		<div class="divider divider-horizontal"></div>
@@ -158,7 +159,7 @@
 				{/each}
 			</div>
 
-			<!-- Controles -->
+			<!-- Controles y redes -->
 			<div class="mt-auto pt-4 flex flex-col justify-around items-center gap-2">
 				<RedesSocialesMobile />
 				<ThemeControllerMobile />
