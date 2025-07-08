@@ -23,7 +23,6 @@
 		name="keywords"
 		content="Brian Benegas, portfolio, desarrollador de software, programador web, ingeniero de software, desarrollador full-stack, desarrollador front-end, desarrollador back-end, freelance, Svelte, SvelteKit, React, Nest.js, Nest, Next.js, Next, Node.js, Node, Express.js, Express, JavaScript, TypeScript, HTML5, CSS3, Tailwind CSS, API, REST API, Docker, Nginx, CI/CD, Git, GitHub, desarrollo de aplicaciones web, soluciones de software, consultoría tecnológica, optimización web, rendimiento web, diseño responsivo, accesibilidad web"
 	/>
-
 	<!-- Open Graph (para Facebook, LinkedIn, etc.) -->
 	<meta property="og:title" content="Brian Benegas - Portfolio" />
 	<meta
