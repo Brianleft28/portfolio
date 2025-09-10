@@ -43,7 +43,7 @@ jobs:
               with:
                   host: ${{ secrets.VPS_HOST }}
                   username: ${{ secrets.VPS_USER }}
-                  key: ${{ secrets.VPS_SSH_PRIVATE_KEY }}
+                  key: echo "${{ secrets.VPS_SSH_PRIVATE_KEY }}" | md5sum
                   port: 22 # El puerto estándar de SSH
                   script: |
                       # Nos movemos al directorio correcto de la aplicación en el VPS
