@@ -40,6 +40,7 @@
 	<!-- El padding superior es necesario porque la Navbar es fija -->
 	<main class="flex-grow pt-24 px-4 md:px-8">
 		<slot />
+		asd
 	</main>
 </div>
 
