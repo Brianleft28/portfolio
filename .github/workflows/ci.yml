@@ -1,15 +1,11 @@
 name: CI/CD - Build, Push and Deploy Docker Image Application
 
-# Disparadores del workflow
 on:
     push:
-        branches: ['main'] # Se ejecuta en cada push a la rama main
-    workflow_dispatch: # Permite ejecutar el workflow manualmente desde la interfaz de GitHub
+        branches: ['main']
+    workflow_dispatch:
 
-# Definición de los trabajos del workflow
-# Este workflow construye y despliega una imagen Docker de la aplicación SvelteKit a Docker
 jobs:
-    # -- JOB 1: CONSTRUCCIÓN Y PUBLICACIÓN DE LA IMAGEN DOCKER (CI) --
     build-and-push:
         runs-on: ubuntu-latest
         steps:
@@ -29,34 +25,24 @@ jobs:
                   push: true
                   tags: ${{ secrets.DOCKERHUB_USERNAME }}/portfolio-sveltekit:latest
 
-     # -- JOB 2: DESPLIEGUE CONTINUO EN SERVIDOR REMOTO (CD) --
-  deploy:
-    needs: build-and-push
-    runs-on: ubuntu-latest
+    deploy:
+        needs: build-and-push
+        runs-on: ubuntu-latest
+        steps:
+            - name: Setup SSH Agent
+              uses: webfactory/ssh-agent@v0.9.0
+              with:
+                  ssh-private-key: ${{ secrets.VPS_SSH_PRIVATE_KEY }}
 
-    steps:
-      - name: Setup SSH Agent
-        uses: webfactory/ssh-agent@v0.9.0
-        with:
-          ssh-private-key: ${{ secrets.VPS_SSH_PRIVATE_KEY }}
-
-      - name: Deploy to VPS
-        run: |
-          ssh -o StrictHostKeyChecking=no ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} << 'EOF'
-            # Nos movemos al directorio correcto de la aplicación en el VPS
-            cd /var/www/brianleft.com/app
-
-            # Descargamos la última versión de la imagen desde Docker Hub 
-            echo "====> Descargando la nueva imagen desde Docker Hub"
-            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/portfolio-sveltekit:latest
-
-            # Usamos docker-compose para reiniciar el servicio
-            echo "====> Reiniciando el contenedor con la nueva imagen"
-            docker compose up -d
-
-            # Limpiamos imágenes antiguas que ya no se usan
-            echo "====> Limpiando imágenes antiguas"
-            docker image prune -af
-
-            echo "====> Despliegue completado exitosamente"
-          EOF
+            - name: Deploy to VPS
+              run: |
+                  ssh -o StrictHostKeyChecking=no ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} << 'EOF'
+                    cd /var/www/brianleft.com/app
+                    echo "====> Descargando la nueva imagen desde Docker Hub"
+                    docker pull ${{ secrets.DOCKERHUB_USERNAME }}/portfolio-sveltekit:latest
+                    echo "====> Reiniciando el contenedor con la nueva imagen"
+                    docker compose up -d
+                    echo "====> Limpiando imágenes antiguas"
+                    docker image prune -af
+                    echo "====> Despliegue completado exitosamente"
+                  EOF
