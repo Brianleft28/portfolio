@@ -120,9 +120,7 @@
 	</div>
 </navbar>
 
-<!-- NUESTRO DRAWER PERSONALIZADO -->
 {#if isDrawerOpen}
-	<!-- 1. El overlay oscuro que cubre la página -->
 	<button
 		type="button"
 		class="custom-drawer-overlay"

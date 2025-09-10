@@ -6,7 +6,6 @@
 
 	const labels = controllerLabels.controllerLabels;
 
-	let currentTheme = 'abyss';
 	let lightThemesList: string[] = [];
 	let darkThemesList: string[] = [];
 
