@@ -1,3 +1,3 @@
 <div>
-	<p class="text-2xl font-bold">soy una prueba para ver si funciona el ci/cd</p>
+	<p class="text-2xl font-bold">Cambios con el nuevo ci/cd</p>
 </div>
