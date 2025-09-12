@@ -6,7 +6,6 @@
 
 <div class="flex items-center gap-x-8">
 	{#each socialLinks as link}
-		{#if link.ariaLabel[$lang]}
 			<a
 				href={link.href}
 				target="_blank"
@@ -26,6 +25,5 @@
 					<path d={link.iconPath} />
 				</svg>
 			</a>
-		{/if}
 	{/each}
 </div>
