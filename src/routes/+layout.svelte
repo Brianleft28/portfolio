@@ -2,10 +2,26 @@
 	import Navbar from '$lib/components/navbar/Navbar.svelte';
 	import '../app.css';
 	import ScrollToTop from '$lib/utils/ScrollToTop.svelte';
+	import { browser } from '$app/environment';
+	import { isAtTop } from '$lib/stores/scrollStore';
+	import { onMount } from 'svelte';
+	import { fade } from 'svelte/transition'; // <-- NUEVO
+
+	onMount(() => {
+		if (browser) {
+			const handleScroll = () => {
+				isAtTop.set(window.scrollY < 50); // Lo consideramos "top" si hemos bajado menos de 50px
+			};
+			window.addEventListener('scroll', handleScroll, { passive: true });
+			return () => {
+				window.removeEventListener('scroll', handleScroll);
+			};
+		}
+	});
 </script>
 
 <svelte:head>
-	<title>Brian Benegas - Portfolio de Desarrollo de Software</title>
+	<title>Brian Benegas - Portfolio IT</title>
 
 	<meta
 		name="description"
@@ -38,9 +54,33 @@
 <div class="flex flex-col">
 	<Navbar />
 	<!-- El padding superior es necesario porque la Navbar es fija -->
-	<main class="flex-grow pt-24 px-4 md:px-8">
+	<main
+		class={`${$isAtTop ? '' : 'mt-9 animate-fadeIn'} flex min-h-screen flex-col items-center transition-all duration-500`}
+	>
 		<slot />
 	</main>
 </div>
+
+{#if $isAtTop}
+	<div
+		transition:fade={{ duration: 300 }}
+		class="fixed scroll-none bottom-10 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-2 text-shadow-secondary text-shadow-2xs"
+	>
+		<svg
+			class="size-6 animate-bounce"
+			xmlns="http://www.w3.org/2000/svg"
+			fill="none"
+			viewBox="0 0 24 24"
+			stroke-width="1.5"
+			stroke="currentColor"
+		>
+			<path
+				stroke-linecap="round"
+				stroke-linejoin="round"
+				d="M19.5 13.5 12 21m0 0-7.5-7.5M12 21V3"
+			/>
+		</svg>
+	</div>
+{/if}
 
 <ScrollToTop />

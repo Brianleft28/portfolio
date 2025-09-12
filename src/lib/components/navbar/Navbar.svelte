@@ -1,69 +1,29 @@
 <script lang="ts">
-	// Imports de componentes (sin cambios)
+	// Imports de componentes
 	import ThemeController from '$lib/components/navbar/ThemeController.svelte';
 	import LangController from '$lib/components/navbar/LangController.svelte';
 	import Logo from '$lib/components/navbar/Logo.svelte';
 	import RedesSociales from '$lib/components/navbar/RedesSociales.svelte';
 	import ThemeControllerMobile from './ThemeControllerMobile.svelte';
 	import LangControllerMobile from './LangControllerMobile.svelte';
-
-	// Stores y datos (sin cambios)
-	import { lang, showNavbar } from '$lib/stores/index';
-	import { page } from '$app/stores';
-	import menuItemsData from '$lib/components/navbar/data/menuItems.json';
-	import { onDestroy, onMount } from 'svelte';
-	import { browser } from '$app/environment';
-	import { fly } from 'svelte/transition'; // Importamos la transición de Svelte
 	import RedesSocialesMobile from './RedesSocialesMobile.svelte';
 
+	// Stores y datos
+	import { lang } from '$lib/stores/index';
+	import { page } from '$app/stores';
+	import menuItemsData from '$lib/components/navbar/data/menuItems.json';
+	import { fly } from 'svelte/transition';
+	import { isAtTop } from '$lib/stores/scrollStore'; // <-- NUEVO: Importamos el nuevo store
+
 	const items = menuItemsData.menuItems;
-
-	// La única lógica que necesitamos: una variable para saber si el drawer está abierto.
 	let isDrawerOpen = false;
-	// --- OPTIMIZACIÓN DE SCROLL CON DEBOUNCE ---
-
-	/**
-	 * Función Debounce: Retrasa la ejecución de una función hasta que haya pasado
-	 * un tiempo (delay) sin que se la llame. Esto evita ejecuciones excesivas.
-	 */
-	function debounce<T extends (...args: any[]) => any>(func: T, delay: number) {
-		let timeout: ReturnType<typeof setTimeout>;
-		return function (this: ThisParameterType<T>, ...args: Parameters<T>) {
-			clearTimeout(timeout);
-			timeout = setTimeout(() => func.apply(this, args), delay);
-		};
-	}
-
-	// La lógica del scroll, ahora en su propia función.
-	const handleScroll = () => {
-		const threshold = document.body.scrollHeight * 0.08;
-		showNavbar.set(window.scrollY < threshold);
-	};
-
-	// Creamos una versión "debounced" de nuestra función.
-	// Solo se ejecutará 100ms después de que el usuario deje de hacer scroll.
-	const debouncedScrollHandler = debounce(handleScroll, 100);
-
-	onMount(() => {
-		if (browser) {
-			// Usamos el listener optimizado.
-			window.addEventListener('scroll', debouncedScrollHandler);
-		}
-	});
-
-	// Es CRUCIAL eliminar el listener cuando el componente se destruye para evitar fugas de memoria.
-	onDestroy(() => {
-		if (browser) {
-			window.removeEventListener('scroll', debouncedScrollHandler);
-		}
-	});
 </script>
 
 <!-- Navbar  -->
 <navbar
 	class="navbar font-[sans-serif] px-4 md:px-10 py-4 fixed top-0 bg-base-100/80 backdrop-blur-xs shadow-sm transition-transform duration-300 ease-in-out z-40"
-	class:translate-y-0={$showNavbar}
-	class:-translate-y-full={!$showNavbar}
+	class:translate-y-0={!$isAtTop}
+	class:-translate-y-full={$isAtTop}
 >
 	<!-- Menú Desktop -->
 	<div class="navbar-start hidden lg:flex items-center gap-4">

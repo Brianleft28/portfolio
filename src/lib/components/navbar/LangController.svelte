@@ -5,7 +5,6 @@
 	import { controllerLabels } from '$lib/components/navbar/data/controllerLabels.json';
 
 	const labels = controllerLabels;
-	let currentLang: Lang = 'ES'; // Idioma predeterminado
 
 	$: currentLang = $lang;
 
