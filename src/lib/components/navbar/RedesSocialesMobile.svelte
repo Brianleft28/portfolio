@@ -13,8 +13,8 @@
 			href={link.href}
 			target="_blank"
 			rel="noopener noreferrer"
-			aria-label={link.ariaLabel[$lang]}
-			class="flex w-full items-center gap-x-4 rounded-lg px-3 py-2 text-base-content transition-colors duration-200 hover:bg-base-300 hover:text-primary"
+		  aria-label={link.ariaLabel[$lang] ? link.ariaLabel[$lang] : link.ariaLabel['ES']}
+        	class="flex w-full items-center gap-x-4 rounded-lg px-3 py-2 text-base-content transition-colors duration-200 hover:bg-base-300 hover:text-primary"
 		>
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
