@@ -32,7 +32,8 @@
 		"vite": "^6.2.6"
 	},
 	"dependencies": {
-		"svelte-particles": "^2.12.0",
-		"tsparticles-engine": "^2.12.0"
+		"svelte-typewriter": "^3.2.3",
+		"tsparticles-engine": "^2.12.0",
+		"typed.js": "^2.1.0"
 	}
 }

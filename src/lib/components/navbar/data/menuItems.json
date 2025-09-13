@@ -8,6 +8,13 @@
 			"JP": { "title": "ホーム", "url": "/" }
 		},
 		{
+			"ES": { "title": "Sobre mí", "url": "/about" },
+			"EN": { "title": "About", "url": "/about" },
+			"FR": { "title": "À propos", "url": "/about" },
+			"DE": { "title": "Über uns", "url": "/about" },
+			"JP": { "title": "約", "url": "/about" }
+		},
+		{
 			"ES": { "title": "Proyectos", "url": "/projects" },
 			"EN": { "title": "Projects", "url": "/projects" },
 			"FR": { "title": "Projets", "url": "/projects" },
@@ -15,25 +22,11 @@
 			"JP": { "title": "プロジェクト", "url": "/projects" }
 		},
 		{
-			"ES": { "title": "Acerca de", "url": "/about" },
-			"EN": { "title": "About", "url": "/about" },
-			"FR": { "title": "À propos", "url": "/about" },
-			"DE": { "title": "Über uns", "url": "/about" },
-			"JP": { "title": "約", "url": "/about" }
-		},
-		{
 			"ES": { "title": "Contacto", "url": "/contact" },
 			"EN": { "title": "Contact", "url": "/contact" },
 			"FR": { "title": "Contact", "url": "/contact" },
 			"DE": { "title": "Kontakt", "url": "/contact" },
 			"JP": { "title": "連絡先", "url": "/contact" }
-		},
-		{
-			"ES": { "title": "Blog", "url": "/blog" },
-			"EN": { "title": "Blog", "url": "/blog" },
-			"FR": { "title": "Blog", "url": "/blog" },
-			"DE": { "title": "Blog", "url": "/blog" },
-			"JP": { "title": "ブログ", "url": "/blog" }
 		}
 	]
 }

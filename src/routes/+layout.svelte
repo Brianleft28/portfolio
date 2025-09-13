@@ -21,7 +21,7 @@
 </script>
 
 <svelte:head>
-	<title>Brian Benegas - Portfolio IT</title>
+	<title>Portfolio IT</title>
 
 	<meta
 		name="description"
@@ -53,7 +53,6 @@
 </svelte:head>
 <div class="flex flex-col">
 	<Navbar />
-	<!-- El padding superior es necesario porque la Navbar es fija -->
 	<main
 		class={`${$isAtTop ? '' : 'mt-9 animate-fadeIn'} flex min-h-screen flex-col items-center transition-all duration-500`}
 	>

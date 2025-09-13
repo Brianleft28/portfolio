@@ -24,9 +24,11 @@
 	class="navbar font-[sans-serif] px-4 md:px-10 py-4 fixed top-0 bg-base-100/80 backdrop-blur-xs shadow-sm transition-transform duration-300 ease-in-out z-40"
 	class:translate-y-0={!$isAtTop}
 	class:-translate-y-full={$isAtTop}
->
+>	
+	<!-- Logo Desktop -->
+	<div class="navbar-start lg:flex hidden"><Logo /></div>
 	<!-- Menú Desktop -->
-	<div class="navbar-start hidden lg:flex items-center gap-4">
+	<div class="navbar-center hidden lg:flex items-center gap-4">
 		<ul class="menu menu-horizontal font-[sans-serif] px-1 text-md">
 			{#each items as item}
 				{#if item[$lang] || item['ES']}
@@ -47,7 +49,6 @@
 			{/each}
 		</ul>
 	</div>
-	<div class="navbar-center lg:flex hidden"><Logo /></div>
 	<!--  Controles y redes sociales Desktop -->
 	<div class="navbar-end lg:flex hidden items-center gap-4">
 		<RedesSociales />
