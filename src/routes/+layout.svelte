@@ -59,7 +59,15 @@
 		<slot />
 	</main>
 </div>
+<!-- Movimiento de scroll -->
+<div class="flex flex-col items-center mb-2 animate-bounce-slow">
+    <span class="text-base text-primary/80 font-medium tracking-wide">
+        Desliza para saber más sobre mí
+    </span>
+    <div class="w-2 h-2 rounded-full bg-primary mt-2 animate-pulse"></div>
+</div>
 
+<!--  Indicador para hacer scroll -->
 {#if $isAtTop}
 	<div
 		transition:fade={{ duration: 300 }}
@@ -83,3 +91,12 @@
 {/if}
 
 <ScrollToTop />
+<style>
+@keyframes bounce-slow {
+    0%, 100% { transform: translateY(0);}
+    50% { transform: translateY(10px);}
+}
+.animate-bounce-slow {
+    animation: bounce-slow 2s infinite;
+}
+</style>

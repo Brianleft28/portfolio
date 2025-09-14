@@ -9,12 +9,13 @@
 
     const content = heroData.heroContent;
     let mounted = false; 
-    let isInView = false; // 1. Variable para controlar si ya se ha visto
+    let isInView = false; //  Variable para controlar si ya se ha visto
 
     onMount(() => {
         mounted = true;
     });
 
+    // Acción para detectar si el elemento está en el viewport
     function viewport(node: HTMLElement) {
         const observer = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
@@ -41,6 +42,10 @@
         };
     }
 
+    // Ritmo aleatorio
+    const randomInterval = () => Math.random() * (120 - 50) + 50;
+    const randomUnwriteInterval = () => Math.random() * (80 - 30) + 30;
+
 </script>
 
 <div class="bg-base-100 relative overflow-hidden w-full min-h-[100vh]">
@@ -56,7 +61,7 @@
                     {content[$lang] ? content[$lang].title : content['ES'].title}
                 </h1>
                 <div
-                    class="text-2xl text-start font-semibold h-8 text-primary"
+                    class="text-2xl text-start font-semibold h-8"
                     in:fly={{ y: 20, duration: 500, delay: 200, easing: quintOut }}
 					out:fade={{ duration: 200 }}
 				>
@@ -78,7 +83,7 @@
                     {/if}
                 </div>
                 <hr
-                    class="my-6 divider-secondary border-e-primary border-e-[56px] text-shadow-2xs text-secondary w-75 text-start border-t-2 origin-left"
+                    class="my-6  border-e-secondary border-e-[56px] text-shadow-2xs text-primary w-75 text-start border-t-2 origin-left"
                     in:draw={{ duration: 700, delay: 300 }}
 					out:fade={{ duration: 200 }}
                 />
@@ -86,9 +91,8 @@
         </div>
     </div>
 </div>
-
 <style>
-    :global(.typewriter-container) {
+        :global(.typewriter-container) {
         --cursor-color: currentColor;
         --cursor-width: 0.12em;
         width: 45ch;
@@ -96,5 +100,24 @@
     }
     :global(.typewriter-container .typing::after) {
         margin-left: 0.2em;
+    }
+    /* Glow animado y gradiente en la palabra activa */
+    :global(.typewriter-container .typing) {
+        background: linear-gradient(90deg, #7f5af0, #00cfff, #ff6ac1, #7f5af0);
+        background-size: 200% 200%;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: gradient-move 2s linear infinite;
+        text-shadow:
+            0 0 8px #7f5af0cc,
+            0 0 16px #00cfff99,
+            0 0 24px #ff6ac188;
+        font-weight: bold;
+        letter-spacing: 0.5px;
+        transition: text-shadow 0.3s;
+    }
+    @keyframes gradient-move {
+        0% { background-position: 0% 50%; }
+        100% { background-position: 100% 50%; }
     }
 </style>
