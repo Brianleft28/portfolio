@@ -5,12 +5,11 @@
 	import { browser } from '$app/environment';
 	import { isAtTop } from '$lib/stores/scrollStore';
 	import { onMount } from 'svelte';
-	import { fade } from 'svelte/transition'; // <-- NUEVO
 
 	onMount(() => {
 		if (browser) {
 			const handleScroll = () => {
-				isAtTop.set(window.scrollY < 50); // Lo consideramos "top" si hemos bajado menos de 50px
+				isAtTop.set(window.scrollY < 50); 
 			};
 			window.addEventListener('scroll', handleScroll, { passive: true });
 			return () => {

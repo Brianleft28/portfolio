@@ -8,11 +8,11 @@
 			"JP": { "title": "ホーム", "url": "/" }
 		},
 		{
-			"ES": { "title": "Sobre mí", "url": "/about" },
-			"EN": { "title": "About", "url": "/about" },
-			"FR": { "title": "À propos", "url": "/about" },
-			"DE": { "title": "Über uns", "url": "/about" },
-			"JP": { "title": "約", "url": "/about" }
+			"ES": { "title": "Sobre mí", "url": "#about" },
+			"EN": { "title": "About", "url": "#about" },
+			"FR": { "title": "À propos", "url": "#about" },
+			"DE": { "title": "Über uns", "url": "#about" },
+			"JP": { "title": "約", "url": "#about" }
 		},
 		{
 			"ES": { "title": "Proyectos", "url": "/projects" },
@@ -22,11 +22,11 @@
 			"JP": { "title": "プロジェクト", "url": "/projects" }
 		},
 		{
-			"ES": { "title": "Contacto", "url": "/contact" },
-			"EN": { "title": "Contact", "url": "/contact" },
-			"FR": { "title": "Contact", "url": "/contact" },
-			"DE": { "title": "Kontakt", "url": "/contact" },
-			"JP": { "title": "連絡先", "url": "/contact" }
+			"ES": { "title": "Contacto", "url": "#contact" },
+			"EN": { "title": "Contact", "url": "#contact" },
+			"FR": { "title": "Contact", "url": "#contact" },
+			"DE": { "title": "Kontakt", "url": "#contact" },
+			"JP": { "title": "連絡先", "url": "#contact" }
 		}
 	]
 }

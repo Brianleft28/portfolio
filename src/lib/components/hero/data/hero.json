@@ -16,52 +16,52 @@
         "EN": {
             "title": "Brian Benegas",
             "typewriter": [
-                "Desarrollador de Software",
-                "Desarrollador de Aplicaciones Enterprise",
-                "Código Funcional, Diseño Intuitivo",
-                "Optimizando la Experiencia de Usuario",
-                "Especialista en Soluciones Lógicas",
-                "De la Idea al Despliegue",
-                "Arquitecturas de Software Sólidas"
-            ]
+                "Software Developer",
+                "Enterprise Applications Developer",
+                "Functional Code, Intuitive Design",
+                "Optimizing User Experience",
+                "Specialist in Logical Solutions",
+                "From Idea to Deployment",
+                "Solid Software Architectures"
+            ],
+            "indicator": "Scroll down to know me better"
         },
         "FR": {
             "title": "Brian Benegas",
             "typewriter": [
-                "Desarrollador de Software",
-                "Desarrollador de Aplicaciones Enterprise",
-                "Código Funcional, Diseño Intuitivo",
-                "Optimizando la Experiencia de Usuario",
-                "Especialista en Soluciones Lógicas",
-                "De la Idea al Despliegue",
-                "Arquitecturas de Software Sólidas"
+                "Développeur de Logiciels",
+                "Développeur d'Applications d'Entreprise",
+                "Code Fonctionnel, Design Intuitif",
+                "Optimisant l'Expérience Utilisateur",
+                "Spécialiste en Solutions Logiques",
+                "De l'Idée au Déploiement",
+                "Architectures Logicielles Solides"
             ],
             "indicator": "Faites défiler vers le bas pour en savoir plus sur moi"
-
         },
         "DE": {
             "title": "Brian Benegas",
             "typewriter": [
-                "Desarrollador de Software",
-                "Desarrollador de Aplicaciones Enterprise",
-                "Código Funcional, Diseño Intuitivo",
-                "Optimizando la Experiencia de Usuario",
-                "Especialista en Soluciones Lógicas",
-                "De la Idea al Despliegue",
-                "Arquitecturas de Software Sólidas"
+                "Softwareentwickler",
+                "Entwickler von Unternehmensanwendungen",
+                "Funktionaler Code, Intuitives Design",
+                "Optimierung der Benutzererfahrung",
+                "Spezialist für Logische Lösungen",
+                "Von der Idee zur Bereitstellung",
+                "Solide Softwarearchitekturen"
             ],
             "indicator": "Scrollen Sie nach unten, um mehr über mich zu erfahren"
         },
         "JP": {
             "title": "ブライアン・ベネガス",
             "typewriter": [
-                "Desarrollador de Software",
-                "Desarrollador de Aplicaciones Enterprise",
-                "Código Funcional, Diseño Intuitivo",
-                "Optimizando la Experiencia de Usuario",
-                "Especialista en Soluciones Lógicas",
-                "De la Idea al Despliegue",
-                "Arquitecturas de Software Sólidas"
+                "ソフトウェア開発者",
+                "エンタープライズアプリケーション開発者",
+                "機能的なコード、直感的なデザイン",
+                "ユーザーエクスペリエンスの最適化",
+                "論理的ソリューションの専門家",
+                "アイデアから展開まで",
+                "堅牢なソフトウェアアーキテクチャ"
             ],
             "indicator": "下にスクロールして私についてもっと知ってください"
         }
