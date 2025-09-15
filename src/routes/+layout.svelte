@@ -59,36 +59,8 @@
 		<slot />
 	</main>
 </div>
-<!-- Movimiento de scroll -->
-<div class="flex flex-col items-center mb-2 animate-bounce-slow">
-    <span class="text-base text-primary/80 font-medium tracking-wide">
-        Desliza para saber más sobre mí
-    </span>
-    <div class="w-2 h-2 rounded-full bg-primary mt-2 animate-pulse"></div>
-</div>
 
-<!--  Indicador para hacer scroll -->
-{#if $isAtTop}
-	<div
-		transition:fade={{ duration: 300 }}
-		class="fixed scroll-none bottom-10 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-2 text-shadow-secondary text-shadow-2xs"
-	>
-		<svg
-			class="size-6 animate-bounce"
-			xmlns="http://www.w3.org/2000/svg"
-			fill="none"
-			viewBox="0 0 24 24"
-			stroke-width="1.5"
-			stroke="currentColor"
-		>
-			<path
-				stroke-linecap="round"
-				stroke-linejoin="round"
-				d="M19.5 13.5 12 21m0 0-7.5-7.5M12 21V3"
-			/>
-		</svg>
-	</div>
-{/if}
+
 
 <ScrollToTop />
 <style>
