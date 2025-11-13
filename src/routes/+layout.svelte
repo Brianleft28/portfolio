@@ -1,26 +1,9 @@
 <script lang="ts">
-	import Navbar from '$lib/components/navbar/Navbar.svelte';
 	import '../app.css';
-	import ScrollToTop from '$lib/utils/ScrollToTop.svelte';
-	import { browser } from '$app/environment';
-	import { isAtTop } from '$lib/stores/scrollStore';
-	import { onMount } from 'svelte';
-
-	onMount(() => {
-		if (browser) {
-			const handleScroll = () => {
-				isAtTop.set(window.scrollY < 50); 
-			};
-			window.addEventListener('scroll', handleScroll, { passive: true });
-			return () => {
-				window.removeEventListener('scroll', handleScroll);
-			};
-		}
-	});
 </script>
 
 <svelte:head>
-	<title>Portfolio IT</title>
+	<title>Portfolio</title>
 
 	<meta
 		name="description"
@@ -43,31 +26,14 @@
 	<meta property="og:image:width" content="1200" />
 	<meta property="og:image:height" content="630" />
 	<meta name="twitter:card" content="summary_large_image" />
-	<meta name="twitter:title" content="Brian Benegas - Portfolio de Desarrollo de Software" />
+	<meta name="twitter:title" content="Portfolio BB" />
 	<meta
 		name="twitter:description"
 		content="Explora los proyectos y la experiencia de Brian Benegas."
 	/>
 	<meta name="twitter:image" content="https://brianleft.com/social-preview.png" />
 </svelte:head>
-<div class="flex flex-col">
-	<Navbar />
-	<main
-		class={`${$isAtTop ? '' : 'mt-9 animate-fadeIn'} flex min-h-screen flex-col items-center transition-all duration-500`}
-	>
+<main class="container-fluid mt-4 font-monospace technical-layout">
 		<slot />
-	</main>
-</div>
+</main>
 
-
-
-<ScrollToTop />
-<style>
-@keyframes bounce-slow {
-    0%, 100% { transform: translateY(0);}
-    50% { transform: translateY(10px);}
-}
-.animate-bounce-slow {
-    animation: bounce-slow 2s infinite;
-}
-</style>
