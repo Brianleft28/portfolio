@@ -8,7 +8,7 @@
 
 _Objetivo: Eliminar "ruido" y deudas técnicas antes de construir._
 
-- [ ] **Tarea 1: Actualizar `README.md` (GitHub)**
+- [ X ] **Tarea 1: Actualizar `README.md` (GitHub)**
   - Reemplazar las menciones a "Tailwind CSS" y "DaisyUI".
   - Mencionar **Bootstrap (Bootswatch "Darkly" theme)** como el framework de UI actual.
 - [ ] **Tarea 2: Corregir SEO en `src/routes/+layout.svelte`**
