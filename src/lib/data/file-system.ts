@@ -79,7 +79,6 @@ export const fileSystemData: FolderNode = {
                     id: 'contacto-app',
                     name: 'Contacto.exe',
                     type: 'component',
-                    // component: ContactoForm (Lo descomentaremos cuando creemos el componente)
                 }
             ]
         },
