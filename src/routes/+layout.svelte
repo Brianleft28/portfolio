@@ -3,7 +3,7 @@
 </script>
 
 <svelte:head>
-	<title>Portfolio</title>
+	<title>brianbenegas.js</title>
 
 	<meta
 		name="description"
@@ -33,7 +33,7 @@
 	/>
 	<meta name="twitter:image" content="https://brianleft.com/social-preview.png" />
 </svelte:head>
-<main class="container-fluid mt-4 font-monospace technical-layout">
+<main class="container-fluid font-monospace">
 		<slot />
 </main>
 
