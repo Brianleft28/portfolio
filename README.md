@@ -1,6 +1,6 @@
 # Portfolio v2 - Brian Benegas
 
-Un portfolio interactivo con temática de explorador de archivos, diseñado para demostrar habilidades full-stack. El frontend está construido con **SvelteKit** y el backend (en desarrollo) utilizará **Nest.js** para servir el contenido desde una base de datos autogestionada.
+Un portfolio interactivo con temática de explorador de archivos, diseñado para demostrar habilidades full-stack a través de una arquitectura de microservicios dockerizados.
 
 ### Stack Tecnológico
 
@@ -13,143 +13,81 @@ Un portfolio interactivo con temática de explorador de archivos, diseñado para
 
 ---
 
-## 🎯 Arquitectura del Sistema (Full-Stack)
+## 🎯 Arquitectura y Estrategia
 
-Este proyecto está diseñado como una aplicación desacoplada:
+Este proyecto sigue un patrón de **arquitectura de microservicios dockerizados**, organizados en un **monorepo** y orquestados a través de `docker-compose`.
 
-1.  **Frontend (Este Repositorio):**
-    * Una aplicación **SvelteKit** que se ejecuta en el lado del cliente.
-    * Es responsable de la interfaz de usuario (la temática de explorador de archivos).
-    * Se conecta a un *endpoint* de API para obtener la lista de proyectos y el contenido.
-    * Usa **Bootstrap (Bootswatch)** para los estilos.
+-   **Frontend:** Un servicio SvelteKit responsable de la interfaz de usuario.
+-   **Backend:** Un servicio Nest.js que expone una API RESTful.
+-   **Base de Datos:** Un servicio MySQL para la persistencia de datos.
 
-2.  **Backend (API Separada - *Planeado*):**
-    * Una API RESTful construida con **Nest.js**.
-    * Esta API gestionará la lógica de negocio y se conectará a la base de datos.
-    * Servirá los datos de los proyectos (nombres, slugs, contenido de markdown, etc.) al frontend de SvelteKit.
+`Docker Compose` crea una red privada donde los servicios se comunican por sus nombres (ej. el frontend llama a `http://api:3000`).
 
-3.  **Infraestructura (VPS Autogestionado):**
-    * Tanto la API de Nest.js como la base de datos **MySQL** residen en un VPS privado.
-    * El frontend de SvelteKit (este proyecto) se despliega usando **Docker** y se sirve a través de un *reverse proxy*.
-    * El pipeline de CI/CD en `.github/workflows/ci.yml` automatiza el despliegue en este VPS.
+### Flujo de Despliegue (CI/CD)
 
-
+El proyecto está configurado para un despliegue continuo totalmente automatizado en un VPS. Un `push` a `main` dispara un workflow de GitHub Actions que construye, publica y despliega las nuevas imágenes Docker.
 
 ---
 
-## 🗺️ Roadmap del Proyecto
+## 🗺️ Roadmap y Documentación
 
-Para ver un desglose detallado de las tareas, objetivos y el estado actual del desarrollo, consulta el roadmap oficial del proyecto.
+La planificación detallada y la documentación técnica del proyecto se encuentran dentro de la carpeta `frontend/src/lib/docs`.
 
-**[Ver el Roadmap del Proyecto](./src/lib/docs/roadmap.MD)**
+-   **[Ver el Roadmap del Proyecto](./frontend/src/lib/docs/roadmap.MD)**
+-   **[Ver Guía de Migración a Monorepo](./frontend/src/lib/docs/monorepo-setup.md)**
+-   **[Ver Diseño de la Base de Datos](./frontend/src/lib/docs/database-schema.md)**
 
 ---
 
-## 🚀 Características
+## 📁 Estructura del Monorepo
 
--   **Soporte Multilingüe**: Disponible en español (predeterminado) e inglés. El idioma se guarda en las cookies.
--   **Diseño Responsivo**: Optimizado para todos los tamaños de dispositivos.
--   **Optimizado para SEO**: Meta etiquetas, `sitemap.xml` y `robots.txt` para mejor visibilidad.
--   **Containerizado**: Configuración Docker para despliegues consistentes.
--   **Pipeline CI/CD**: Construcción y despliegue automatizado con GitHub Actions.
-
-## 🛠️ Tecnologías Utilizadas
-
--   **Framework Frontend**: [SvelteKit](https://kit.svelte.dev/) / [Svelte 5](https://svelte.dev/)
--   **API Backend (Planeado)**: [Nest.js](https://nestjs.com/)
--   **Base de Datos (Planeado)**: [MySQL](https://www.mysql.com/)
--   **Estilos**: [Bootstrap (Bootswatch)](https://bootswatch.com/)
--   **Lenguaje**: [TypeScript](https://www.typescriptlang.org/)
--   **Containerización**: [Docker](https://www.docker.com/)
--   **CI/CD**: [GitHub Actions](https://github.com/features/actions)
--   **Despliegue**: Servidor Node.js usando `@sveltejs/adapter-node`
-
-## 📁 Estructura del Proyecto
-
+```
 .
-├── .github/
-│   └── workflows/
-│       └── ci.yml
-├── .svelte-kit/
-│   └── (Archivos generados por SvelteKit)
-├── src/
-│   ├── lib/
-│   │   ├── docs/
-│   │   └── img/
-│   ├── routes/
-│   │   ├── +layout.svelte
-│   │   └── +page.svelte
-│   ├── app.css
-│   ├── app.d.ts
-│   ├── app.html
-│   └── hooks.server.ts
-├── static/
-│   ├── css/
-│   │   └── bootstrap.min.css
-│   ├── js/
-│   ├── robots.txt
-│   └── sitemap.xml
-├── .gitignore
-├── .npmrc
-├── .prettierignore
-├── .prettierrc
-├── Dockerfile
-├── package.json
-├── README.md
-├── svelte.config.js
-├── tsconfig.json
-└── vite.config.ts
+├── api/                  # Microservicio de Backend (NestJS)
+├── frontend/             # Microservicio de Frontend (SvelteKit)
+└── docker-compose.yml    # Orquesta todos los servicios
+```
 
-## 🏃‍♂️ Primeros Pasos
+---
 
-### Requisitos Previos
+## 🏃‍♂️ Desarrollo Local
 
--   Node.js (versión LTS)
--   npm o pnpm
--   (Opcional) Docker
+Existen dos formas de trabajar en este proyecto.
 
-### Instalación
+### Opción 1: Ejecutar la Arquitectura Completa (Recomendado)
 
-1.  Clonar el repositorio:
+Este método utiliza Docker Compose para levantar todos los microservicios y simular el entorno de producción.
+
+1.  **Clonar el repositorio:**
     ```bash
-    git clone [https://github.com/Brianleft28/portfolio_sveltekit.git](https://github.com/Brianleft28/portfolio_sveltekit.git)
+    git clone https://github.com/Brianleft28/portfolio_sveltekit.git
     cd portfolio_sveltekit
     ```
-
-2.  Instalar dependencias:
+2.  **Levantar los servicios:**
     ```bash
-    npm install
+    docker-compose up -d --build
     ```
+3.  **Acceder:** El frontend estará disponible en `http://localhost:5173`.
 
-3.  Iniciar el servidor de desarrollo:
-    ```bash
-    npm run dev
-    ```
+### Opción 2: Desarrollar un Servicio de Forma Aislada
 
-4.  Abrir el navegador y navegar a `http://localhost:5173`
+Si solo necesitas trabajar en un servicio específico sin levantar toda la infraestructura.
 
-## 🔧 Scripts
+**Para el Frontend (SvelteKit):**
+```bash
+cd frontend
+npm install
+npm run dev
+```
 
--   `npm run dev` - Iniciar servidor de desarrollo
--   `npm run build` - Construir para producción
--   `npm run preview` - Vista previa de la build de producción localmente
--   `npm run check` - Verificar tipos en el proyecto
--   `npm run format` - Formatear código con Prettier
--   `npm run lint` - Verificar formato del código
+**Para el Backend (NestJS):**
+```bash
+cd api
+npm install
+npm run start:dev
+```
 
-## 🐳 Docker
-
-El proyecto incluye un Dockerfile multi-etapa para builds de producción optimizadas:
-
-1.  Construir la imagen Docker:
-    ```bash
-    docker build -t portfolio-sveltekit .
-    ```
-
-2.  Ejecutar el contenedor:
-    ```bash
-    docker run -p 3000:3000 portfolio-sveltekit
-    ```
+---
 
 ## 📄 Licencia
 
