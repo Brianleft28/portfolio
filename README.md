@@ -15,6 +15,7 @@ Un portfolio interactivo con temática de explorador de archivos, diseñado para
 
 ## 🎯 Arquitectura y Estrategia
 
+
 Este proyecto sigue un patrón de **arquitectura de microservicios dockerizados**, organizados en un **monorepo** y orquestados a través de `docker-compose`.
 
 -   **Frontend:** Un servicio SvelteKit responsable de la interfaz de usuario.
