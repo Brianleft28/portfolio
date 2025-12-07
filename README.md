@@ -34,9 +34,9 @@ El proyecto está configurado para un despliegue continuo totalmente automatizad
 
 La planificación detallada y la documentación técnica del proyecto se encuentran dentro de la carpeta `frontend/src/lib/docs`.
 
--   **[Ver el Roadmap del Proyecto](./frontend/src/lib/docs/roadmap.MD)**
--   **[Ver Guía de Migración a Monorepo](./frontend/src/lib/docs/monorepo-setup.md)**
--   **[Ver Diseño de la Base de Datos](./frontend/src/lib/docs/database-schema.md)**
+-   **[Ver el Roadmap del Proyecto](./src/lib/docs/roadmap.MD)**
+-   **[Ver Guía de Migración a Monorepo](./src/lib/docs/monorepo-setup.md)**
+-   **[Ver Diseño de la Base de Datos](./src/lib/docs/database-schema.md)**
 
 ---
 
